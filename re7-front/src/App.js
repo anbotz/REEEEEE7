@@ -10,6 +10,7 @@ import HomePage from './pages/home';
 import AddRecipePage from "./pages/add-recipe";
 import LoginPage from "./pages/login";
 import WipPage from "./pages/wip";
+import RecipesPage from "./pages/recipes";
 
 const NavComponent = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ const App = () => {
 
 
           <Route path="/week" element={<WipPage />} />
-          <Route path="/recipes" element={<WipPage />} />
+          <Route path="/recipes" element={<RecipesPage />} />
           <Route path="/add-ingredient" element={<WipPage />} />
           <Route path="/signup" element={<WipPage />} />
           <Route path="/logout" element={<WipPage />} />
