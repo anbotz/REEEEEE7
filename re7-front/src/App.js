@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import styled from "styled-components";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import HomePage from './pages/home';
+import AddRecipePage from "./pages/add-recipe";
+import LoginPage from "./pages/login";
+import WipPage from "./pages/wip";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const NavComponent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: "Rockbubble";
+  margin: 10 10px;
+`;
+
+const StyledLink = styled(Link)`
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #333;
+ 
+:hover {
+  background-color: rgb(112, 4, 89);
+  color: white;
 }
+`;
+
+const StyledComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
+const App = () => {
+  return (
+    <Router>
+      <StyledComponent>
+        <NavComponent>
+
+          <StyledLink to="/">RE7</StyledLink>
+          <StyledLink to="/week">Semaine</StyledLink>
+          <StyledLink to="/recipes">Recettes</StyledLink>
+          <StyledLink to="/add-recipe">Ajouter une recette</StyledLink>
+          <StyledLink to="/add-ingredient">Ajouter un ingrédient</StyledLink>
+          <StyledLink to="/signup">Enregistrement</StyledLink>
+          <StyledLink to="/login">Connexion</StyledLink>
+          <StyledLink to="/logout">Déconnexion</StyledLink>
+        </NavComponent>
+        <Routes>
+          <Route path="/" exact element={<HomePage />} />
+          <Route path="/add-recipe" element={<AddRecipePage />} />
+          <Route path="/login" element={<LoginPage />} />
+
+
+          <Route path="/week" element={<WipPage />} />
+          <Route path="/recipes" element={<WipPage />} />
+          <Route path="/add-ingredient" element={<WipPage />} />
+          <Route path="/signup" element={<WipPage />} />
+          <Route path="/logout" element={<WipPage />} />
+
+        </Routes>
+      </StyledComponent>
+    </Router>
+  );
+};
 
 export default App;
