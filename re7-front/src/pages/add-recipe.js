@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 
-import { StyledForm, StyledPage } from "../styled-components";
+import { StyledForm, StyledPage, StyledTitle, EMOJI } from "../styled-components";
 import styled from "styled-components";
 import { getAllIngredients } from "../services/ingredientsRoute";
 import { set } from "../slices/ingredientsSlices"
@@ -21,8 +21,9 @@ const AddButton = styled.div`
 const StyledRow = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;    
     align-items: center;
+    width: 100%;
 `
 
 const AddRecipePage = () => {
@@ -44,12 +45,15 @@ const AddRecipePage = () => {
     const onSubmit = (data) => {
         console.log(data)
         createRecipe(data)
-        // navigate("/")
     };
 
     return (
         <StyledPage>
-            <h1>Ajout d'une recette</h1>
+            <StyledTitle>
+                <img src={EMOJI.DISHWARE} width='50' />
+                Ajout d'une recette
+                <img src={EMOJI.DISHWARE} width='50' />
+            </StyledTitle>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
                 <input placeholder="Nom" {...register("name")} />
                 {[...Array(ingredientNumber).keys()].map((i) =>
@@ -59,8 +63,7 @@ const AddRecipePage = () => {
                                 <option key={choice._id} value={choice.name}>{choice.name} ({choice.unit})</option>
                             )}
                         </select>
-                        <input placeholder="Quantité" {...register(`ingredients[${i}].quantity`)}></input>
-
+                        <input placeholder="Quantité" {...register(`ingredients[${i}].quantity`)} />
                     </StyledRow>)}
                 <StyledRow>
                     <AddButton onClick={() => setIngredientNumber(ingredientNumber + 1)}>+</AddButton>

@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { StyledForm, StyledPage } from "../styled-components";
+import { StyledForm, StyledPage, StyledTitle, EMOJI } from "../styled-components";
 import { createIngredient } from "../services/ingredientsRoute";
 
-const UNIT = ['unité', 'gramme', 'litre', 'boite']
+const UNIT = ['unité', 'gramme', 'litre', 'boite', 'autres']
 
 const AddIngredientPage = () => {
     const { register, handleSubmit } = useForm({
@@ -16,7 +16,11 @@ const AddIngredientPage = () => {
 
     return (
         <StyledPage>
-            <h1>Ajout d'un ingrédient</h1>
+            <StyledTitle>
+                <img src={EMOJI.BANANA} width='50' />
+                Ajout d'un ingrédient
+                <img src={EMOJI.BANANA} width='50' />
+            </StyledTitle>
             <StyledForm onSubmit={handleSubmit(onSubmit)}>
                 <input placeholder="Nom" {...register("name")} />
                 <select placeholder="Unité" {...register("unit")}>

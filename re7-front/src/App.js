@@ -17,6 +17,8 @@ import WeekPage from "./pages/week/index";
 import RecipesPage from "./pages/recipes";
 import SignupPage from "./pages/signup";
 import AddIngredientPage from "./pages/add-ingredient";
+import AdminPage from "./pages/admin";
+import { EMOJI, COLOR } from "./styled-components";
 
 const NavComponent = styled.div`
   display: flex;
@@ -30,9 +32,13 @@ const StyledLink = styled(Link)`
   padding: 5px 10px;
   text-decoration: none;
   color: #333;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0 5px 5px 0px;
  
 :hover {
-  background-color: rgb(112, 4, 89);
+  background-color:#${COLOR.GAMBODE};
   color: white;
 }
 `;
@@ -58,24 +64,24 @@ const App = () => {
         <NavComponent>
 
           <StyledLink to="/">RE7</StyledLink>
-          <StyledLink to="/week">Semaine</StyledLink>
-          <StyledLink to="/recipes">Recettes</StyledLink>
-          <StyledLink to="/add-recipe">Ajouter une recette</StyledLink>
-          {user?.admin && <StyledLink to="/add-ingredient">Ajouter un ingrédient</StyledLink>}
+          {user?.userId && <StyledLink to="/week">
+            <img src={EMOJI.CALENDAR} width='40' />Semaine</StyledLink>}
+          <StyledLink to="/recipes"> <img src={EMOJI.RECIPE} width='40' />Recettes</StyledLink>
+          {user?.admin && <StyledLink to="/admin"><img src={EMOJI.COMPUTER} width='40' />Admin</StyledLink>}
+
           {!user?.userId && <StyledLink to="/signup">Enregistrement</StyledLink>}
-          {!user?.userId && <StyledLink to="/login">Connexion</StyledLink>}
+          {!user?.userId && <StyledLink to="/login"> <img src={EMOJI.WAVING} width='40' />Connexion</StyledLink>}
           {user?.userId && <StyledLink onClick={() => {
             cookie.remove("token");
             dispatch(reset());
-          }} to="/">Déconnexion</StyledLink>}
+          }} to="/"> <img src={EMOJI.DOOR} width='40' />Déconnexion</StyledLink>}
         </NavComponent>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
-          <Route path="/add-recipe" element={<AddRecipePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/week" element={<WeekPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
-          <Route path="/add-ingredient" element={<AddIngredientPage />} />
           <Route path="/signup" element={<SignupPage />} />
 
         </Routes>
