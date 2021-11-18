@@ -12,7 +12,6 @@ const SignupPage = () => {
     });
 
     const onSubmit = (data) => {
-        console.log(data);
         signUp(data);
     };
 

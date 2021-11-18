@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import cookie from "js-cookie";
+
+import { useSelector, useDispatch } from "react-redux";
+import { set, reset } from "./slices/userSlice";
+import { decodeToken } from "react-jwt";
 import {
   BrowserRouter as Router,
   Routes,
@@ -39,6 +44,14 @@ const StyledComponent = styled.div`
 `;
 
 const App = () => {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = cookie.get("token");
+    dispatch(set(decodeToken(token)));
+  }, [cookie, dispatch, set]);
+
   return (
     <Router>
       <StyledComponent>
