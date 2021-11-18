@@ -8,8 +8,7 @@ const path = require("path");
 const db = require("./database");
 
 const recipeRouter = require("./routers/recipeRouter");
-
-
+const userRouter = require('./routers/userRouter')
 
 db();
 
@@ -19,6 +18,7 @@ app.use(express.json());
 // public
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/user", userRouter);
 app.use("/recipe", recipeRouter);
 
 

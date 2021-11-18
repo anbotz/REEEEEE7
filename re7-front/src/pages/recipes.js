@@ -13,11 +13,10 @@ const RecipesPage = () => {
             .then((res) => dispatch(set(res)))
     }, [dispatch])
 
-
     return (
         <StyledPage>
             <h1>Recettes</h1>
-            {recipes.map((recipe, index) => <div>{recipe.name}</div>)}
+            {recipes.map((recipe) => <div key={recipe._id}>{recipe.name}</div>)}
         </StyledPage>
     )
 }

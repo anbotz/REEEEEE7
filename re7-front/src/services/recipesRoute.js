@@ -7,7 +7,7 @@ export const getAllRecipes = () => {
             return res.data;
         })
         .catch((error) => {
-            console.log(`erreur lors de la récupération des documents`);
+            console.log(`erreur lors de la récupération des recettes`);
             console.log(error);
         });
 };
