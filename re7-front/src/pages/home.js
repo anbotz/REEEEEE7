@@ -5,6 +5,7 @@ const HomePage = () => {
     return (
         <StyledPage>
             Bonjour Bienvenue !
+            <button onClick={() => { }}> test</button>
         </StyledPage>
     )
 }
