@@ -26,7 +26,6 @@ async function login(req, res, next) {
             return res.status(403).send({ error: `le mot de passe est incorrect` });
         }
 
-
         return res.status(200).json({
             token: jwt.sign(
                 {

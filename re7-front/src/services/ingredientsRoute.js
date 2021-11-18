@@ -1,28 +1,28 @@
 const axios = require("axios");
 
-export const getAllRecipes = () => {
+export const getAllIngredients = () => {
     return axios
-        .get("http://localhost:8000/recipe/")
+        .get("http://localhost:8000/ingredient/")
         .then((res) => {
             return res.data;
         })
         .catch((error) => {
-            console.log(`erreur lors de la récupération des recettes`);
+            console.log(`erreur lors de la récupération des ingredients`);
             console.log(error);
         });
 };
 
-export const createRecipe = (data) => {
+export const createIngredient = (data) => {
     return axios({
         method: "post",
-        url: "http://localhost:8000/recipe/",
+        url: "http://localhost:8000/ingredient/",
         data
     })
         .then((response) => {
             console.log(response);
         })
         .catch((error) => {
-            console.log(`erreur lors de la création de la recette`);
+            console.log(`erreur lors de la création de l'ingrédient`);
             console.log(error);
         });
 };

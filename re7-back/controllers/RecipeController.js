@@ -1,15 +1,24 @@
 const RecipeSchema = require("../schemas/RecipeSchema");
 
 exports.getAllRecipe = async (req, res, next) => {
-    RecipeSchema.find()
-        .then((data) => {
-            console.log('data', data);
-            res.status(200).json(data);
-        })
-        .catch((err) => {
-            console.log(`Erreur lors de la récupération des recettes ${err}`);
-            res.status(500);
-        });
+    try {
+        const data = await RecipeSchema.find();
+        return res.status(200).json(data);
+    } catch (error) {
+        console.log(`Erreur lors de la récupération des recettes ${error}`);
+        res.status(500);
+    }
+};
 
-    console.log('ici');
+exports.createRecipe = async (req, res, next) => {
+    const { name, ingredients, directions } = req.body;
+    try {
+        const recipe = new RecipeSchema({ name, ingredients, directions })
+        await recipe.save()
+        res.status(201).json({ message: "Recette enregistrée" });
+
+    } catch (error) {
+        console.log(`Erreur lors de la création de la recette ${error}`);
+        res.status(500);
+    }
 };

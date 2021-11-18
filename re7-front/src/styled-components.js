@@ -5,7 +5,7 @@ export const StyledPage = styled.div`
     flex-grow: 1;
     padding: 20px;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 `;
 
@@ -26,6 +26,15 @@ export const StyledForm = styled.form`
 
     }
     textarea {
+        margin: 5px 0 10px 0;
+        border-radius: 5px;
+        padding: 10px;
+        outline: 0;
+        border: 1.5px solid black;
+        width: 100%;
+
+    }
+    select {
         margin: 5px 0 10px 0;
         border-radius: 5px;
         padding: 10px;

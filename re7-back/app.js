@@ -9,6 +9,7 @@ const db = require("./database");
 
 const recipeRouter = require("./routers/recipeRouter");
 const userRouter = require('./routers/userRouter')
+const ingredientRouter = require('./routers/ingredientRouter')
 
 db();
 
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", userRouter);
 app.use("/recipe", recipeRouter);
+app.use("/ingredient", ingredientRouter);
 
 
 app.listen(process.env.PORT, () => {

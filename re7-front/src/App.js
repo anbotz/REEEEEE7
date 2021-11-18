@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import cookie from "js-cookie";
-
 import { useSelector, useDispatch } from "react-redux";
 import { set, reset } from "./slices/userSlice";
 import { decodeToken } from "react-jwt";
@@ -14,9 +13,10 @@ import {
 import HomePage from './pages/home';
 import AddRecipePage from "./pages/add-recipe";
 import LoginPage from "./pages/login";
-import WipPage from "./pages/wip";
+import WeekPage from "./pages/week/index";
 import RecipesPage from "./pages/recipes";
 import SignupPage from "./pages/signup";
+import AddIngredientPage from "./pages/add-ingredient";
 
 const NavComponent = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const App = () => {
   useEffect(() => {
     const token = cookie.get("token");
     dispatch(set(decodeToken(token)));
-  }, [cookie, dispatch, set]);
+  }, [dispatch]);
 
   return (
     <Router>
@@ -61,22 +61,22 @@ const App = () => {
           <StyledLink to="/week">Semaine</StyledLink>
           <StyledLink to="/recipes">Recettes</StyledLink>
           <StyledLink to="/add-recipe">Ajouter une recette</StyledLink>
-          <StyledLink to="/add-ingredient">Ajouter un ingrédient</StyledLink>
-          <StyledLink to="/signup">Enregistrement</StyledLink>
-          <StyledLink to="/login">Connexion</StyledLink>
-          <StyledLink to="/logout">Déconnexion</StyledLink>
+          {user?.admin && <StyledLink to="/add-ingredient">Ajouter un ingrédient</StyledLink>}
+          {!user?.userId && <StyledLink to="/signup">Enregistrement</StyledLink>}
+          {!user?.userId && <StyledLink to="/login">Connexion</StyledLink>}
+          {user?.userId && <StyledLink onClick={() => {
+            cookie.remove("token");
+            dispatch(reset());
+          }} to="/">Déconnexion</StyledLink>}
         </NavComponent>
         <Routes>
           <Route path="/" exact element={<HomePage />} />
           <Route path="/add-recipe" element={<AddRecipePage />} />
           <Route path="/login" element={<LoginPage />} />
-
-
-          <Route path="/week" element={<WipPage />} />
+          <Route path="/week" element={<WeekPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
-          <Route path="/add-ingredient" element={<WipPage />} />
+          <Route path="/add-ingredient" element={<AddIngredientPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/logout" element={<WipPage />} />
 
         </Routes>
       </StyledComponent>
