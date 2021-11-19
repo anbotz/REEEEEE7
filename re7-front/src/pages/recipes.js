@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import { deleteRecipe, getAllRecipes } from '../services/recipesRoute';
 import { set } from '../slices/recipesSlice';
@@ -38,6 +39,7 @@ const StyledName = styled.div`
 const RecipesPage = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllRecipes().then((res) => dispatch(set(res)));
@@ -52,11 +54,20 @@ const RecipesPage = () => {
             <img src={EMOJI.DISHWARE} width="100" alt="disware" />
             <StyledName>
               {recipe.name}
-              <img src={EMOJI.MODIFY} width="20" alt="modify" />
+              <img
+                src={EMOJI.UPDATE}
+                width="20"
+                alt="update"
+                title="Modifier"
+                onClick={() => {
+                  navigate(`/update-recipe/${recipe._id}`);
+                }}
+              />
               <img
                 src={EMOJI.DELETE}
                 width="20"
                 alt="delete"
+                title="Supprimer"
                 onClick={() => {
                   deleteRecipe(recipe._id);
                   getAllRecipes().then((res) => dispatch(set(res)));

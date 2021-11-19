@@ -9,7 +9,7 @@ export const EMOJI = {
   WAVING: 'https://openmoji.org/data/color/svg/1F44B.svg',
   COMPUTER: 'https://openmoji.org/data/color/svg/1F5A5.svg',
   DELETE: 'https://openmoji.org/data/color/svg/274C.svg',
-  MODIFY: 'https://openmoji.org/data/color/svg/2699.svg',
+  UPDATE: 'https://openmoji.org/data/color/svg/2699.svg',
 };
 
 export const COLOR = {

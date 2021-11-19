@@ -40,3 +40,20 @@ export const deleteRecipe = (id) => {
       console.log(error);
     });
 };
+
+export const updateRecipe = (data, id) => {
+  return axios({
+    method: 'put',
+    url: `http://localhost:8000/recipe/${id}`,
+    data: {
+      recipe: data,
+    },
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(`erreur lors de la suppression de la recette`);
+      console.log(error);
+    });
+};

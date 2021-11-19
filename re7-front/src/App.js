@@ -12,6 +12,7 @@ import RecipesPage from './pages/recipes';
 import SignupPage from './pages/signup';
 import AdminPage from './pages/admin';
 import { EMOJI, COLOR } from './styled-components';
+import UpdateRecipePage from './pages/update-recipe';
 
 const NavComponent = styled.div`
   display: flex;
@@ -67,7 +68,7 @@ const App = () => {
             <img src={EMOJI.RECIPE} width="40" alt="recipe" />
             Recettes
           </StyledLink>
-          {user?.admin && (
+          {user?.isAdmin && (
             <StyledLink to="/admin">
               <img src={EMOJI.COMPUTER} width="40" alt="computer" />
               Admin
@@ -77,7 +78,6 @@ const App = () => {
           {!user?.userId && <StyledLink to="/signup">Enregistrement</StyledLink>}
           {!user?.userId && (
             <StyledLink to="/login">
-              {' '}
               <img src={EMOJI.WAVING} width="40" alt="waving" />
               Connexion
             </StyledLink>
@@ -89,7 +89,6 @@ const App = () => {
                 dispatch(reset());
               }}
               to="/">
-              {' '}
               <img src={EMOJI.DOOR} width="40" alt="door" />
               Déconnexion
             </StyledLink>
@@ -102,6 +101,7 @@ const App = () => {
           <Route path="/week" element={<WeekPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/update-recipe/:id" element={<UpdateRecipePage />} />
         </Routes>
       </StyledComponent>
     </Router>

@@ -18,7 +18,7 @@ const AddIngredientPage = () => {
     <StyledPage>
       <StyledTitle>
         <img src={EMOJI.BANANA} width="50" alt="banana" />
-        Ajout d'un ingrédient
+        Ajouter un ingrédient
         <img src={EMOJI.BANANA} width="50" alt="banana" />
       </StyledTitle>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>

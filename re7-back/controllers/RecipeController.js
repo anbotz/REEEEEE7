@@ -32,3 +32,24 @@ exports.deleteRecipe = async (req, res, next) => {
     res.status(500);
   }
 };
+
+exports.updateRecipe = async (req, res, next) => {
+  const { id } = req.params;
+  const { recipe } = req.body;
+  try {
+    await RecipeSchema.updateOne(
+      { _id: id },
+      {
+        $set: {
+          name: recipe.name,
+          ingredients: recipe.ingredients,
+          directions: recipe.directions,
+        },
+      }
+    );
+    return res.status(204).json({ message: 'Recette mise à jour' });
+  } catch (error) {
+    console.log(`Erreur lors de la mise à jour de la recette ${error}`);
+    res.status(500);
+  }
+};

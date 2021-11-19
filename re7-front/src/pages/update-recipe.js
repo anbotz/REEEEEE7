@@ -6,7 +6,8 @@ import { StyledForm, StyledPage, StyledTitle, EMOJI } from '../styled-components
 import styled from 'styled-components';
 import { getAllIngredients } from '../services/ingredientsRoute';
 import { set } from '../slices/ingredientsSlices';
-import { createRecipe } from '../services/recipesRoute';
+import { updateRecipe } from '../services/recipesRoute';
+import { useParams } from 'react-router';
 
 const AddButton = styled.div`
   border: 1px solid black;
@@ -25,10 +26,13 @@ const StyledRow = styled.div`
   width: 100%;
 `;
 
-const AddRecipePage = () => {
+const UpdateRecipePage = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const [ingredientNumber, setIngredientNumber] = useState(1);
+  const [recipe] = useState(useSelector((state) => state.recipes.find((prod) => prod._id === id)));
+
+  const [ingredientNumber, setIngredientNumber] = useState(recipe.ingredients.length);
   const ingredientChoices = useSelector((state) => state.ingredients);
 
   useEffect(() => {
@@ -36,18 +40,22 @@ const AddRecipePage = () => {
   }, [dispatch]);
 
   const { register, handleSubmit } = useForm({
-    defaultValues: { name: '', ingredients: [], directions: '' },
+    defaultValues: {
+      name: recipe.name,
+      ingredients: recipe.ingredients,
+      directions: recipe.directions,
+    },
   });
 
   const onSubmit = (data) => {
-    createRecipe(data);
+    updateRecipe(data, id);
   };
 
   return (
     <StyledPage>
       <StyledTitle>
         <img src={EMOJI.DISHWARE} width="50" alt="dishware" />
-        Ajouter une recette
+        Modifier la recette
         <img src={EMOJI.DISHWARE} width="50" alt="dishware" />
       </StyledTitle>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -69,10 +77,10 @@ const AddRecipePage = () => {
           <AddButton onClick={() => setIngredientNumber(ingredientNumber - 1)}>-</AddButton>
         </StyledRow>
         <textarea placeholder="Etapes à suivre (faculatif)" {...register('directions')} />
-        <button>Ajouter la recette</button>
+        <button>Modifier la recette</button>
       </StyledForm>
     </StyledPage>
   );
 };
 
-export default AddRecipePage;
+export default UpdateRecipePage;
