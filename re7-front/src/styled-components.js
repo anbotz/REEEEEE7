@@ -9,7 +9,11 @@ export const EMOJI = {
   WAVING: 'https://openmoji.org/data/color/svg/1F44B.svg',
   COMPUTER: 'https://openmoji.org/data/color/svg/1F5A5.svg',
   DELETE: 'https://openmoji.org/data/color/svg/274C.svg',
-  UPDATE: 'https://openmoji.org/data/color/svg/2699.svg',
+  UPDATE: 'https://openmoji.org/data/color/svg/270F.svg',
+  MEMO: 'https://openmoji.org/data/color/svg/1F4DD.svg',
+  BREAKFEAST: 'https://openmoji.org/data/color/svg/1F9C7.svg',
+  LUNCH: 'https://openmoji.org/data/color/svg/1F957.svg',
+  DINNER: 'https://openmoji.org/data/color/svg/1F372.svg',
 };
 
 export const COLOR = {
@@ -76,9 +80,27 @@ export const StyledForm = styled.form`
   }
 `;
 
-export const StyledTitle = styled.h1`
+export const StyledTitle = styled.div`
+  font-size: 1.2em;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
+  font-family: 'Rockbubble';
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const StyledClickableImg = styled.img`
+  cursor: pointer;
+  ${(props) =>
+    props.isGrey
+      ? `
+      filter: gray;
+      -webkit-filter: grayscale(1); 
+      filter: grayscale(1);
+  `
+      : ''}
 `;

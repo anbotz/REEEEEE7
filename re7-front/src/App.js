@@ -13,11 +13,13 @@ import SignupPage from './pages/signup';
 import AdminPage from './pages/admin';
 import { EMOJI, COLOR } from './styled-components';
 import UpdateRecipePage from './pages/update-recipe';
+import RecipePage from './pages/recipe';
+import LinkComponent from './components/link-component';
 
 const NavComponent = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   font-family: 'Rockbubble';
   margin: 10 10px;
 `;
@@ -30,6 +32,9 @@ const StyledLink = styled(Link)`
   flex-direction: row;
   align-items: center;
   border-radius: 0 0 10px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   :hover {
     background-color: #${COLOR.GAMBODE};
@@ -57,41 +62,22 @@ const App = () => {
       <StyledComponent>
         <NavComponent>
           <StyledLink to="/">RE7</StyledLink>
+          {user?.userId && <LinkComponent to="/week" src={EMOJI.CALENDAR} name="Semaine" />}
+          <LinkComponent to="/recipes" src={EMOJI.RECIPE} name="Recettes" />
+          {user?.isAdmin && <LinkComponent to="/admin" src={EMOJI.COMPUTER} name="Admin" />}
+          {!user?.userId && <LinkComponent to="/signup" src={EMOJI.MEMO} name="Enregistrement" />}
+          {!user?.userId && <LinkComponent to="/login" src={EMOJI.WAVING} name="Connexion" />}
           {user?.userId && (
-            <StyledLink to="/week">
-              <img src={EMOJI.CALENDAR} width="40" alt="calendar" />
-              Semaine
-            </StyledLink>
-          )}
-          <StyledLink to="/recipes">
-            {' '}
-            <img src={EMOJI.RECIPE} width="40" alt="recipe" />
-            Recettes
-          </StyledLink>
-          {user?.isAdmin && (
-            <StyledLink to="/admin">
-              <img src={EMOJI.COMPUTER} width="40" alt="computer" />
-              Admin
-            </StyledLink>
-          )}
-
-          {!user?.userId && <StyledLink to="/signup">Enregistrement</StyledLink>}
-          {!user?.userId && (
-            <StyledLink to="/login">
-              <img src={EMOJI.WAVING} width="40" alt="waving" />
-              Connexion
-            </StyledLink>
-          )}
-          {user?.userId && (
-            <StyledLink
+            <LinkComponent
               onClick={() => {
                 cookie.remove('token');
                 dispatch(reset());
               }}
-              to="/">
-              <img src={EMOJI.DOOR} width="40" alt="door" />
-              Déconnexion
-            </StyledLink>
+              to="/"
+              src={EMOJI.DOOR}
+              name="Déconnexion"
+              notToAnimate
+            />
           )}
         </NavComponent>
         <Routes>
@@ -99,9 +85,10 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/week" element={<WeekPage />} />
-          <Route path="/recipes" element={<RecipesPage />} />
+          <Route path="/recipes" exact element={<RecipesPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/update-recipe/:id" element={<UpdateRecipePage />} />
+          <Route path="/recipe/:id" element={<RecipePage />} />
         </Routes>
       </StyledComponent>
     </Router>

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { getAllIngredients } from '../services/ingredientsRoute';
 import { set } from '../slices/ingredientsSlices';
 import { updateRecipe } from '../services/recipesRoute';
-import { useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 const AddButton = styled.div`
   border: 1px solid black;
@@ -29,8 +29,11 @@ const StyledRow = styled.div`
 const UpdateRecipePage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const [recipe] = useState(useSelector((state) => state.recipes.find((prod) => prod._id === id)));
+  const {
+    state: { recipe },
+  } = useLocation();
 
   const [ingredientNumber, setIngredientNumber] = useState(recipe.ingredients.length);
   const ingredientChoices = useSelector((state) => state.ingredients);
@@ -77,7 +80,10 @@ const UpdateRecipePage = () => {
           <AddButton onClick={() => setIngredientNumber(ingredientNumber - 1)}>-</AddButton>
         </StyledRow>
         <textarea placeholder="Etapes à suivre (faculatif)" {...register('directions')} />
-        <button>Modifier la recette</button>
+        <button type="submit">Modifier la recette</button>
+        <button type="cancel" onClick={() => navigate(-1)}>
+          Annuler
+        </button>
       </StyledForm>
     </StyledPage>
   );

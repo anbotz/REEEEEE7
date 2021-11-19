@@ -22,7 +22,6 @@ const SignupPage = () => {
 
   return (
     <StyledPage>
-      <h1>Enregistrement</h1>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <input placeholder="Pseudonyme" {...register('username', { required: true, maxLength: 20, minLength: 3 })} />
 

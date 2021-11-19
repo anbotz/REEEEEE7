@@ -1,21 +1,62 @@
-import React, { useState } from "react";
-import { StyledPage } from "../../styled-components";
-import WeekTableComponent from "./components/week-table";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { StyledPage, StyledClickableImg, EMOJI } from '../../styled-components';
+import WeekTableComponent from './components/week-table';
+
+const StyledActionBar = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
 
 const WeekPage = () => {
-    const [isBreakfeastActivate, setBreakfeastActivate] = useState(false);
-    const [isLunchActivate, setLunchActivate] = useState(true);
-    const [isDinnerActivate, setDinnerActivate] = useState(true);
+  const [isBreakfeastActivate, setBreakfeastActivate] = useState(false);
+  const [isLunchActivate, setLunchActivate] = useState(true);
+  const [isDinnerActivate, setDinnerActivate] = useState(true);
 
-    return (
-        <StyledPage>
-            Page Semaine
-            <button onClick={() => { setBreakfeastActivate(!isBreakfeastActivate) }}>Petit-déjeuner</button>
-            <button onClick={() => { setLunchActivate(!isLunchActivate) }}>Déjeuner</button>
-            <button onClick={() => { setDinnerActivate(!isDinnerActivate) }}>Repas</button>
-            <WeekTableComponent isBreakfeastActivate={isBreakfeastActivate} isLunchActivate={isLunchActivate} isDinnerActivate={isDinnerActivate} />
-        </StyledPage>
-    )
-}
+  return (
+    <StyledPage>
+      <StyledActionBar>
+        <StyledClickableImg
+          onClick={() => {
+            setBreakfeastActivate(!isBreakfeastActivate);
+          }}
+          src={EMOJI.BREAKFEAST}
+          alt="breakfeast"
+          width="50"
+          isGrey={!isBreakfeastActivate}
+        />
+        <StyledClickableImg
+          onClick={() => {
+            setLunchActivate(!isLunchActivate);
+          }}
+          src={EMOJI.LUNCH}
+          alt="lunch"
+          width="50"
+          isGrey={!isLunchActivate}
+        />
+        <StyledClickableImg
+          onClick={() => {
+            setDinnerActivate(!isDinnerActivate);
+          }}
+          src={EMOJI.DINNER}
+          alt="dinner"
+          width="50"
+          isGrey={!isDinnerActivate}
+        />
+      </StyledActionBar>
+
+      {isDinnerActivate || isBreakfeastActivate || isLunchActivate ? (
+        <WeekTableComponent
+          isBreakfeastActivate={isBreakfeastActivate}
+          isLunchActivate={isLunchActivate}
+          isDinnerActivate={isDinnerActivate}
+        />
+      ) : (
+        <>Rien de prévu </>
+      )}
+    </StyledPage>
+  );
+};
 
 export default WeekPage;
