@@ -1,13 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { StyledPage, EMOJI, StyledClickableImg, StyledTitle } from '../styled-components';
 import { deleteRecipe } from '../services/recipesRoute';
 import styled from 'styled-components';
-
-const SurStyledTitle = styled(StyledTitle)`
-  flex: 1;
-`;
+import { getAllIngredients } from '../services/ingredientsRoute';
 
 const StyledTopSection = styled.div`
   display: grid;
@@ -56,14 +53,28 @@ const RecipePage = () => {
     state: { recipe },
   } = useLocation();
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const isAdmin = useSelector((state) => state.user.isAdmin);
+  const [surchargedRecipe, setSurchargedRecipe] = useState(recipe);
+
+  useEffect(() => {
+    getAllIngredients().then((res) => {
+      const surchargedIngredients = recipe.ingredients.reduce((acc, ing) => {
+        const { unit } = res.find((ingr) => ingr.name === ing.name);
+        return [...acc, { ...ing, unit }];
+      }, []);
+
+      setSurchargedRecipe({ ...recipe, ingredients: surchargedIngredients });
+    });
+  }, [dispatch, recipe]);
 
   return (
     <StyledPage>
       <StyledTopSection>
         <div />
-        <SurStyledTitle> {recipe.name}</SurStyledTitle>
+        <StyledTitle> {surchargedRecipe.name}</StyledTitle>
         <StyledActionBar>
           {isAdmin && (
             <StyledClickableImg
@@ -92,14 +103,14 @@ const RecipePage = () => {
       </StyledTopSection>
       <StyledTitle2>Ingrédients : </StyledTitle2>
       <StyledIngredientList>
-        {recipe?.ingredients.map((ingredient) => (
-          <li>
-            {ingredient.name}/{ingredient.quantity}
+        {surchargedRecipe?.ingredients.map((ingredient) => (
+          <li key={ingredient.name}>
+            {ingredient.name} : {ingredient.quantity} {ingredient.unit}
           </li>
         ))}
       </StyledIngredientList>
       <StyledTitle2>Préparation : </StyledTitle2>
-      <StyledDirections> {recipe.directions}</StyledDirections>
+      <StyledDirections> {surchargedRecipe.directions}</StyledDirections>
     </StyledPage>
   );
 };

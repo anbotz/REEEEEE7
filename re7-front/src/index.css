@@ -24,3 +24,8 @@ code {
   font-family: 'Rockbubble';
   src: url(./font/ROCKBUBBLE.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Made-Evolve';
+  src: url(./font/MADE-EVOLVE.otf) format('opentype');
+}

@@ -2,16 +2,19 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { StyledForm, StyledPage, StyledTitle, EMOJI } from '../styled-components';
 import { createIngredient } from '../services/ingredientsRoute';
+import { useNavigate } from 'react-router';
 
 const UNIT = ['unité', 'gramme', 'litre', 'boite', 'autres'];
 
 const AddIngredientPage = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm({
     defaultValues: { name: '', unit: UNIT[0] },
   });
 
   const onSubmit = (data) => {
     createIngredient(data);
+    navigate(0);
   };
 
   return (
