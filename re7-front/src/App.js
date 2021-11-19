@@ -22,13 +22,13 @@ const NavComponent = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  padding: 5px 10px;
+  padding: 5px 20px;
   text-decoration: none;
   color: #333;
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-radius: 0 5px 5px 0px;
+  border-radius: 0 0 10px 10px;
 
   :hover {
     background-color: #${COLOR.GAMBODE};

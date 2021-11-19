@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getAllRecipes } from '../services/recipesRoute';
+import { deleteRecipe, getAllRecipes } from '../services/recipesRoute';
 import { set } from '../slices/recipesSlice';
 import { StyledPage, EMOJI } from '../styled-components';
 
@@ -25,8 +25,14 @@ const StyledRecipe = styled.div`
 `;
 
 const StyledName = styled.div`
-  border: 1px solid black;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  & img {
+    cursor: pointer;
+  }
 `;
 
 const RecipesPage = () => {
@@ -44,7 +50,19 @@ const RecipesPage = () => {
         {recipes.map((recipe) => (
           <StyledRecipe key={recipe._id}>
             <img src={EMOJI.DISHWARE} width="100" alt="disware" />
-            <StyledName>{recipe.name}</StyledName>
+            <StyledName>
+              {recipe.name}
+              <img src={EMOJI.MODIFY} width="20" alt="modify" />
+              <img
+                src={EMOJI.DELETE}
+                width="20"
+                alt="delete"
+                onClick={() => {
+                  deleteRecipe(recipe._id);
+                  getAllRecipes().then((res) => dispatch(set(res)));
+                }}
+              />
+            </StyledName>
           </StyledRecipe>
         ))}
       </StyledRecipes>

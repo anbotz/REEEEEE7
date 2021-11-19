@@ -1,8 +1,10 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const RecipeController = require("../controllers/RecipeController");
+const isAuth = require('../middleware/auth');
+const RecipeController = require('../controllers/RecipeController');
 
-router.get("/", RecipeController.getAllRecipe);
-router.post("/", RecipeController.createRecipe)
+router.get('/', RecipeController.getAllRecipe);
+router.post('/', RecipeController.createRecipe);
+router.delete('/:id', RecipeController.deleteRecipe);
 
 module.exports = router;
