@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { getAllRecipes } from '../../services/recipesRoute';
 import { StyledPage, StyledClickableImg, EMOJI } from '../../styled-components';
 import WeekTableComponent from './components/week-table';
+import { set } from '../../slices/recipesSlice';
 
 const StyledActionBar = styled.div`
   display: flex;
@@ -10,9 +13,17 @@ const StyledActionBar = styled.div`
 `;
 
 const WeekPage = () => {
+  const dispatch = useDispatch();
+
   const [isBreakfeastActivate, setBreakfeastActivate] = useState(false);
   const [isLunchActivate, setLunchActivate] = useState(true);
   const [isDinnerActivate, setDinnerActivate] = useState(true);
+  const recipes = useSelector((state) => state.recipes);
+  const week = useSelector((state) => state.week);
+
+  useEffect(() => {
+    getAllRecipes().then((res) => dispatch(set(res)));
+  }, [dispatch]);
 
   return (
     <StyledPage>
@@ -48,13 +59,16 @@ const WeekPage = () => {
 
       {isDinnerActivate || isBreakfeastActivate || isLunchActivate ? (
         <WeekTableComponent
+          week={week}
+          recipes={recipes}
           isBreakfeastActivate={isBreakfeastActivate}
           isLunchActivate={isLunchActivate}
           isDinnerActivate={isDinnerActivate}
         />
       ) : (
-        <>Rien de prévu </>
+        <>Rien à prévoir ? </>
       )}
+      <button disabled={true}>Prêt! </button>
     </StyledPage>
   );
 };
