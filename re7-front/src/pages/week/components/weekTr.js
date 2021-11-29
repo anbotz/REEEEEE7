@@ -1,12 +1,12 @@
 import React from 'react';
 import DayTdComponent from './dayTd';
 
-const WeekTrComponent = ({ line, recipes }) => {
+const WeekTrComponent = ({ line, recipes, indexLine }) => {
   return (
     <tr>
       <td>{line.name}</td>
       {line.days.map((day, index) => (
-        <DayTdComponent key={line.name + day} day={day} recipes={recipes} cellIndex={index} />
+        <DayTdComponent key={line.name + index} day={day} recipes={recipes} cellCouple={{ indexLine, index }} />
       ))}
     </tr>
   );

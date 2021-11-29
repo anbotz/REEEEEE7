@@ -29,3 +29,9 @@ code {
   font-family: 'Made-Evolve';
   src: url(./font/MADE-EVOLVE.otf) format('opentype');
 }
+
+@media screen and (max-width: 667px) {
+  body {
+    overflow-x: hidden !important;
+  }
+}

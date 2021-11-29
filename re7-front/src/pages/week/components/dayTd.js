@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addFilledMeals, removeFilledMeals } from '../../../slices/weekSlice';
+import { addFilledMeals, removeFilledMeals, resetDays, setDays } from '../../../slices/weekSlice';
 import { COLOR } from '../../../styled-components';
 import { useDetectOutsideClick } from '../../../utils/useDetectOutsideClick';
 
@@ -18,7 +18,6 @@ const StyledMenu = styled.div`
   position: absolute;
   top: 5px;
   left: 0;
-  width: 300px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
@@ -68,24 +67,25 @@ const StyledTd = styled.td`
   min-width: 100px;
 `;
 
-const DayTdComponent = ({ day, recipes, cellIndex }) => {
+const DayTdComponent = ({ day, recipes, cellCouple }) => {
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
-  const [choice, setChoice] = useState(day);
+  const [choice, setChoice] = useState(day.day);
 
   return (
     <StyledTd onClick={() => setIsActive(!isActive)}>
-      <StyledChoice isChoose={choice && choice !== day ? true : false}>{choice}</StyledChoice>
+      <StyledChoice isChoose={day.isChoose}>{choice}</StyledChoice>
       <div className="container">
         <StyledMenuContainer>
           <StyledMenu ref={dropdownRef} isActive={isActive}>
             <StyledRecipeChoice
               onClick={() => {
-                setChoice(day);
+                setChoice(day.day);
                 dispatch(removeFilledMeals());
+                dispatch(resetDays({ cellCouple }));
               }}>
-              {day}
+              {day.day}
             </StyledRecipeChoice>
 
             {recipes.map((recipe, index) => (
@@ -94,6 +94,7 @@ const DayTdComponent = ({ day, recipes, cellIndex }) => {
                 onClick={() => {
                   setChoice(recipe.name);
                   dispatch(addFilledMeals());
+                  dispatch(setDays({ cellCouple, recipe }));
                 }}>
                 {recipe.name}
               </StyledRecipeChoice>

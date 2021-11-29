@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 import { StyledPage, EMOJI, StyledClickableImg, StyledTitle } from '../styled-components';
-import { deleteRecipe } from '../services/recipesRoute';
+import { deleteRecipe, getAllRecipes } from '../services/recipesRoute';
 import styled from 'styled-components';
 import { getAllIngredients } from '../services/ingredientsRoute';
+import { set } from '../slices/recipesSlice';
 
 const StyledTopSection = styled.div`
   display: grid;
@@ -95,6 +96,7 @@ const RecipePage = () => {
               title="Supprimer"
               onClick={() => {
                 deleteRecipe(recipe._id);
+                getAllRecipes().then((res) => dispatch(set(res)));
                 navigate(-1);
               }}
             />

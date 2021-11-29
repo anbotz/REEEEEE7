@@ -8,34 +8,50 @@ const StyledTable = styled.table`
   width: 100%;
   table-layout: fixed;
 
+  & tbody {
+    & tr {
+      & td:first-child {
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
   & thead {
     & th {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 100px;
     }
     & th:first-child {
       text-align: left;
     }
   }
 `;
-const WeekDays = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+const WEEKDAYS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
 
-const WeekTableComponent = ({ week, recipes, isBreakfeastActivate, isLunchActivate, isDinnerActivate }) => {
+const WeekTableComponent = ({ week, recipes }) => {
   return (
     <StyledTable>
       <thead>
         <tr>
           <th>Demi-journée</th>
-          {WeekDays.map((day) => (
+          {WEEKDAYS.map((day) => (
             <th key={day}>{day}</th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {isBreakfeastActivate && <WeekTrComponent line={week.lines[0]} name="Petit-déjeuner" recipes={recipes} />}
-        {isLunchActivate && <WeekTrComponent line={week.lines[1]} name="Déjeuner" recipes={recipes} />}
-        {isDinnerActivate && <WeekTrComponent line={week.lines[2]} name="Repas" recipes={recipes} />}
+        {week.lines.map((line, index) => {
+          return line.isActive ? (
+            <WeekTrComponent key={index} line={line} indexLine={index} name={line.name} recipes={recipes} />
+          ) : (
+            <tr key={index} />
+          );
+        })}
       </tbody>
     </StyledTable>
   );

@@ -7,16 +7,22 @@ const StyledDoubleColumn = styled.div`
   display: flex;
   flex-grow: 1;
   padding: 20px;
-  flex-direction: row;
+
   justify-content: flex-start;
   align-items: top;
+
+  flex-direction: column;
+
+  @media only screen and (min-width: 800px) {
+    flex-direction: row;
+  }
 `;
 
 const AdminPage = () => {
   return (
     <StyledDoubleColumn>
-      <AddIngredientPage></AddIngredientPage>
-      <AddRecipePage></AddRecipePage>
+      <AddIngredientPage />
+      <AddRecipePage />
     </StyledDoubleColumn>
   );
 };

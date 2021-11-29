@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getAllRecipes } from '../../services/recipesRoute';
 import { StyledPage, StyledClickableImg, EMOJI } from '../../styled-components';
 import WeekTableComponent from './components/week-table';
 import { set } from '../../slices/recipesSlice';
+import { setActive } from '../../slices/weekSlice';
 
 const StyledActionBar = styled.div`
   display: flex;
@@ -14,10 +15,6 @@ const StyledActionBar = styled.div`
 
 const WeekPage = () => {
   const dispatch = useDispatch();
-
-  const [isBreakfeastActivate, setBreakfeastActivate] = useState(false);
-  const [isLunchActivate, setLunchActivate] = useState(true);
-  const [isDinnerActivate, setDinnerActivate] = useState(true);
   const recipes = useSelector((state) => state.recipes);
   const week = useSelector((state) => state.week);
 
@@ -30,45 +27,41 @@ const WeekPage = () => {
       <StyledActionBar>
         <StyledClickableImg
           onClick={() => {
-            setBreakfeastActivate(!isBreakfeastActivate);
+            dispatch(setActive({ indexLine: 0 }));
           }}
           src={EMOJI.BREAKFEAST}
           alt="breakfeast"
           width="50"
-          isGrey={!isBreakfeastActivate}
+          isGrey={!week.lines[0].isActive}
         />
         <StyledClickableImg
           onClick={() => {
-            setLunchActivate(!isLunchActivate);
+            dispatch(setActive({ indexLine: 1 }));
           }}
           src={EMOJI.LUNCH}
           alt="lunch"
           width="50"
-          isGrey={!isLunchActivate}
+          isGrey={!week.lines[1].isActive}
         />
         <StyledClickableImg
           onClick={() => {
-            setDinnerActivate(!isDinnerActivate);
+            dispatch(setActive({ indexLine: 2 }));
           }}
           src={EMOJI.DINNER}
           alt="dinner"
           width="50"
-          isGrey={!isDinnerActivate}
+          isGrey={!week.lines[2].isActive}
         />
       </StyledActionBar>
 
-      {isDinnerActivate || isBreakfeastActivate || isLunchActivate ? (
-        <WeekTableComponent
-          week={week}
-          recipes={recipes}
-          isBreakfeastActivate={isBreakfeastActivate}
-          isLunchActivate={isLunchActivate}
-          isDinnerActivate={isDinnerActivate}
-        />
+      {week.lines[0].isActive || week.lines[1].isActive || week.lines[2].isActive ? (
+        <WeekTableComponent week={week} recipes={recipes} />
       ) : (
         <>Rien à prévoir ? </>
       )}
-      <button disabled={true}>Prêt! </button>
+      {(week.lines[0].isActive || week.lines[1].isActive || week.lines[2].isActive) && (
+        <button disabled={true}>Prêt! </button>
+      )}
     </StyledPage>
   );
 };
