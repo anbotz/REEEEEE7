@@ -65,7 +65,7 @@ const AddRecipePage = () => {
                 </option>
               ))}
             </select>
-            <input placeholder="Quantité" {...register(`ingredients[${i}].quantity`)} value="1" />
+            <input placeholder="Quantité" {...register(`ingredients[${i}].quantity`)} />
           </StyledRow>
         ))}
         <StyledRow>
