@@ -25,22 +25,11 @@ const StyledLink = styled(NavLink)`
       display: block;
     }
   }
-  ${(props) =>
-    props.notToAnimate
-      ? ''
-      : `
-  &.active {
-    background: #${COLOR.TUSCAN};
-    color: white;
-    & div {
-      display: block;
-    }
-  `}
 `;
 
-const LinkComponent = ({ to, name, src, onClick, notToAnimate }) => {
+const LinkComponent = ({ to, name, src, onClick }) => {
   return (
-    <StyledLink notToAnimate={notToAnimate} onClick={onClick} to={to}>
+    <StyledLink onClick={onClick} to={to}>
       <img src={src} width="40" alt={name} />
       <div> {name}</div>
     </StyledLink>

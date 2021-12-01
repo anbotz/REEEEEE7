@@ -11,7 +11,7 @@ import WeekPage from './pages/week/index';
 import RecipesPage from './pages/recipes';
 import SignupPage from './pages/signup';
 import AdminPage from './pages/admin';
-import { EMOJI } from './styled-components';
+import { EMOJI, COLOR } from './styled-components';
 import UpdateRecipePage from './pages/update-recipe';
 import RecipePage from './pages/recipe';
 import LinkComponent from './components/link-component';
@@ -29,6 +29,30 @@ const StyledComponent = styled.div`
   flex-direction: column;
   height: 100%;
   font-family: 'Made-Evolve';
+`;
+
+const StyledNonLink = styled.a`
+  padding: 5px 20px;
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0 0 10px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  & div {
+    display: none;
+  }
+  :hover {
+    background-color: #${COLOR.GAMBODE};
+    color: white;
+    & div {
+      display: block;
+    }
+  }
 `;
 
 const App = () => {
@@ -50,16 +74,15 @@ const App = () => {
           {!user?.userId && <LinkComponent to="/signup" src={EMOJI.MEMO} name="Enregistrement" />}
           {!user?.userId && <LinkComponent to="/login" src={EMOJI.WAVING} name="Connexion" />}
           {user?.userId && (
-            <LinkComponent
+            <StyledNonLink
               onClick={() => {
                 cookie.remove('token');
                 dispatch(reset());
               }}
-              to="/"
-              src={EMOJI.DOOR}
-              name="Déconnexion"
-              notToAnimate
-            />
+              href="/">
+              <img src={EMOJI.DOOR} width="40" alt="Déconnexion" />
+              <div> Déconnexion</div>
+            </StyledNonLink>
           )}
         </NavComponent>
         <Routes>
