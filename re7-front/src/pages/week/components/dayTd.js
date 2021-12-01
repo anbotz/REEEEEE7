@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { addFilledMeals, removeFilledMeals, resetDays, setDays } from '../../../slices/weekSlice';
@@ -75,6 +75,12 @@ const DayTdComponent = ({ day, recipes, cellCouple }) => {
   const dropdownRef = useRef(null);
   const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
   const [choice, setChoice] = useState(day.day);
+
+  useEffect(() => {
+    if (day.isChoose) {
+      setChoice(day.name);
+    }
+  }, [day]);
 
   return (
     <StyledTd onClick={() => setIsActive(!isActive)}>

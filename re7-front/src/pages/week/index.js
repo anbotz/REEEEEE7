@@ -5,7 +5,7 @@ import { getAllRecipes } from '../../services/recipesRoute';
 import { StyledPage, StyledClickableImg, EMOJI } from '../../styled-components';
 import WeekTableComponent from './components/week-table';
 import { set } from '../../slices/recipesSlice';
-import { setActive } from '../../slices/weekSlice';
+import { reset, setActive } from '../../slices/weekSlice';
 
 const StyledActionBar = styled.div`
   display: flex;
@@ -20,6 +20,7 @@ const WeekPage = () => {
 
   useEffect(() => {
     getAllRecipes().then((res) => dispatch(set(res)));
+    dispatch(reset());
   }, [dispatch]);
 
   return (
