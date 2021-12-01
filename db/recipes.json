@@ -1,0 +1,194 @@
+[{
+  "_id": {
+    "$oid": "61977e258753ef8d9861ad70"
+  },
+  "name": "pancake",
+  "ingredients": [
+    {
+      "name": "lait",
+      "quantity": 47,
+      "_id": {
+        "$oid": "61977e258753ef8d9861ad71"
+      }
+    },
+    {
+      "name": "farine",
+      "quantity": 500,
+      "_id": {
+        "$oid": "6197cd9a86f60f09e5d7ee28"
+      }
+    }
+  ],
+  "directions": "super génial",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a4d2b4f5fbb41fa9b066f0"
+  },
+  "name": "crêpes",
+  "ingredients": [
+    {
+      "name": "lait",
+      "quantity": 0.5,
+      "_id": {
+        "$oid": "61a4d2b4f5fbb41fa9b066f1"
+      }
+    },
+    {
+      "name": "oeuf",
+      "quantity": 3,
+      "_id": {
+        "$oid": "61a4d2b4f5fbb41fa9b066f2"
+      }
+    },
+    {
+      "name": "farine",
+      "quantity": 250,
+      "_id": {
+        "$oid": "61a4d2b4f5fbb41fa9b066f3"
+      }
+    }
+  ],
+  "directions": "",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a4d407f5fbb41fa9b06735"
+  },
+  "name": "Seitan laqué",
+  "ingredients": [
+    {
+      "name": "seitan ",
+      "quantity": 200,
+      "_id": {
+        "$oid": "61a4d407f5fbb41fa9b06736"
+      }
+    },
+    {
+      "name": "carotte",
+      "quantity": 2,
+      "_id": {
+        "$oid": "61a4d407f5fbb41fa9b06737"
+      }
+    },
+    {
+      "name": "brocoli",
+      "quantity": 1,
+      "_id": {
+        "$oid": "61a4d407f5fbb41fa9b06738"
+      }
+    },
+    {
+      "name": "soja",
+      "quantity": 0.05,
+      "_id": {
+        "$oid": "61a4d407f5fbb41fa9b06739"
+      }
+    },
+    {
+      "name": "sirop d'érable",
+      "quantity": 0.05,
+      "_id": {
+        "$oid": "61a4d407f5fbb41fa9b0673a"
+      }
+    }
+  ],
+  "directions": "",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a4d458f5fbb41fa9b0674d"
+  },
+  "name": "général tao",
+  "ingredients": [
+    {
+      "name": "tofu ",
+      "quantity": 200,
+      "_id": {
+        "$oid": "61a4d458f5fbb41fa9b0674e"
+      }
+    },
+    {
+      "name": "riz",
+      "quantity": 150,
+      "_id": {
+        "$oid": "61a4d458f5fbb41fa9b0674f"
+      }
+    },
+    {
+      "name": "soja",
+      "quantity": 0.04,
+      "_id": {
+        "$oid": "61a4d458f5fbb41fa9b06750"
+      }
+    },
+    {
+      "name": "sirop d'érable",
+      "quantity": 0.04,
+      "_id": {
+        "$oid": "61a4d458f5fbb41fa9b06751"
+      }
+    },
+    {
+      "name": "ketchup",
+      "quantity": 0.04,
+      "_id": {
+        "$oid": "61a4d458f5fbb41fa9b06752"
+      }
+    }
+  ],
+  "directions": "",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a4d572f5fbb41fa9b067e7"
+  },
+  "name": "tarte tofu fumé",
+  "ingredients": [
+    {
+      "name": "oignon rouge",
+      "quantity": 1,
+      "_id": {
+        "$oid": "61a4d572f5fbb41fa9b067e8"
+      }
+    },
+    {
+      "name": "tofu fumé",
+      "quantity": 200,
+      "_id": {
+        "$oid": "61a4d572f5fbb41fa9b067e9"
+      }
+    },
+    {
+      "name": "tomate",
+      "quantity": 2,
+      "_id": {
+        "$oid": "61a4d572f5fbb41fa9b067ea"
+      }
+    },
+    {
+      "name": "tarte brisée",
+      "quantity": 1,
+      "_id": {
+        "$oid": "61a4d572f5fbb41fa9b067eb"
+      }
+    },
+    {
+      "name": "sucre",
+      "quantity": 10,
+      "_id": {
+        "$oid": "61a4d572f5fbb41fa9b067ec"
+      }
+    }
+  ],
+  "directions": "",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61a7562153d40a7452494e7c"
+  },
+  "name": "longueRecetttteeeeeeeeee",
+  "ingredients": [],
+  "directions": "",
+  "__v": 0
+}]
