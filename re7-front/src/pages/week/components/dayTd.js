@@ -13,9 +13,12 @@ const StyledMenuContainer = styled.div`
 `;
 
 const StyledMenu = styled.div`
+  overflow-y: scroll;
+  height: 200px;
   background: #f9eae1;
   border-radius: 5px;
   position: absolute;
+  width: 100%;
   top: 5px;
   left: 0;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
@@ -90,6 +93,7 @@ const DayTdComponent = ({ day, recipes, cellCouple }) => {
 
             {recipes.map((recipe, index) => (
               <StyledRecipeChoice
+                title={recipe.name}
                 key={index}
                 onClick={() => {
                   setChoice(recipe.name);
