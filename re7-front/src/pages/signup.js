@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { StyledForm, StyledPage } from '../styled-components';
+import { StyledForm, StyledPage, StyledErrorList } from '../styled-components';
 import { signUp } from '../services/userRoute';
 
 const SignupPage = () => {
@@ -25,10 +25,14 @@ const SignupPage = () => {
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <input placeholder="Pseudonyme" {...register('username', { required: true, maxLength: 20, minLength: 3 })} />
 
-        <input placeholder="Mot de passe" type="password" {...register('password')} />
-        {errors.username?.type === 'required' && 'Pseudonyme requis'}
-        {errors.username?.type === 'maxLength' && 'Pseudonyme trop long (20 caractères maximum)'}
-        {errors.username?.type === 'minLength' && 'Pseudonyme trop court (3 caractères minimum)'}
+        <input placeholder="Mot de passe" type="password" {...register('password', { required: true, minLength: 8 })} />
+        <StyledErrorList>
+          {errors.username?.type === 'required' && <div>Pseudonyme requis</div>}
+          {errors.username?.type === 'maxLength' && <div>Pseudonyme trop long (20 caractères maximum)</div>}
+          {errors.username?.type === 'minLength' && <div>Pseudonyme trop court (3 caractères minimum)</div>}
+          {errors.password?.type === 'required' && <div>Mot de passe requis</div>}
+          {errors.password?.type === 'minLength' && <div>Mot de passe trop court (8 caractères minimum)</div>}
+        </StyledErrorList>
         <button>Enregistrement</button>
       </StyledForm>
     </StyledPage>

@@ -104,3 +104,11 @@ export const StyledClickableImg = styled.img`
   `
       : ''}
 `;
+
+export const StyledErrorList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: red;
+`;

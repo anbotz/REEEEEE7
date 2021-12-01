@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { StyledForm, StyledPage, StyledTitle, EMOJI } from '../styled-components';
+import { StyledForm, StyledPage, StyledTitle, EMOJI, StyledErrorList } from '../styled-components';
 import styled from 'styled-components';
 import { getAllIngredients } from '../services/ingredientsRoute';
 import { set } from '../slices/ingredientsSlices';
@@ -42,7 +42,11 @@ const UpdateRecipePage = () => {
     getAllIngredients().then((res) => dispatch(set(res)));
   }, [dispatch]);
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
     defaultValues: {
       name: recipe.name,
       ingredients: recipe.ingredients,
@@ -62,7 +66,7 @@ const UpdateRecipePage = () => {
         <img src={EMOJI.DISHWARE} width="50" alt="dishware" />
       </StyledTitle>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <input placeholder="Nom" {...register('name')} />
+        <input placeholder="Nom" {...register('name', { required: true })} />
         {[...Array(ingredientNumber).keys()].map((i) => (
           <StyledRow key={i}>
             <select placeholder="Liste des ingrédients" {...register(`ingredients[${i}].name`)}>
@@ -72,7 +76,11 @@ const UpdateRecipePage = () => {
                 </option>
               ))}
             </select>
-            <input placeholder="Quantité" {...register(`ingredients[${i}].quantity`)} />
+            <input
+              placeholder="Quantité"
+              {...register(`ingredients[${i}].quantity`)}
+              value={recipe.ingredients[i].quantity}
+            />
           </StyledRow>
         ))}
         <StyledRow>
@@ -80,6 +88,7 @@ const UpdateRecipePage = () => {
           <AddButton onClick={() => setIngredientNumber(ingredientNumber - 1)}>-</AddButton>
         </StyledRow>
         <textarea placeholder="Etapes à suivre (faculatif)" {...register('directions')} />
+        <StyledErrorList>{errors.name?.type === 'required' && <div>Nom requis</div>}</StyledErrorList>
         <button type="submit">Modifier la recette</button>
         <button type="cancel" onClick={() => navigate(-1)}>
           Annuler
