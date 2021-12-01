@@ -15,7 +15,7 @@ const StyledLink = styled(NavLink)`
   overflow: hidden;
   text-overflow: ellipsis;
 
-  & div {
+ & div {
     display: none;
   }
   :hover {
@@ -25,6 +25,13 @@ const StyledLink = styled(NavLink)`
       display: block;
     }
   }
+  
+  &.active {
+    background: #${COLOR.TUSCAN};
+    color: white;
+    & div {
+      display: block;
+    }
 `;
 
 const LinkComponent = ({ to, name, src, onClick }) => {

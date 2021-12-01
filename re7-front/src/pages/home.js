@@ -1,13 +1,12 @@
-import React from "react";
-import { StyledPage } from "../styled-components";
+import React from 'react';
+import { StyledPage, StyledTitle } from '../styled-components';
 
 const HomePage = () => {
-    return (
-        <StyledPage>
-            Bonjour Bienvenue !
-            <button onClick={() => { }}> test</button>
-        </StyledPage>
-    )
-}
+  return (
+    <StyledPage>
+      <StyledTitle> Bienvenue chez RE7 !</StyledTitle>
+    </StyledPage>
+  );
+};
 
 export default HomePage;

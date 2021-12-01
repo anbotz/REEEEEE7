@@ -14,7 +14,7 @@ const StyledMenuContainer = styled.div`
 
 const StyledMenu = styled.div`
   overflow-y: scroll;
-  height: 200px;
+  max-height: 110px;
   background: #f9eae1;
   border-radius: 5px;
   position: absolute;
