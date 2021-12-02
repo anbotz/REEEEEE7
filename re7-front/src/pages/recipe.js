@@ -57,7 +57,7 @@ const RecipePage = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const isAdmin = useSelector((state) => state.user?.isAdmin);
   const [surchargedRecipe, setSurchargedRecipe] = useState(recipe);
 
   useEffect(() => {
