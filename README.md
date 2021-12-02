@@ -1,8 +1,12 @@
 ## Database
 
-There is a database in db directory, add it to mongoDB !
-(admin is a/a, wow such security)
-...
+There is a database in db directory, add it to mongoDB !\
+(admin is a/a, wow such security)\
+...\
+
+## Installation
+
+You have to run `yarn/npm` in both directory (re7-front and re7-back)
 
 ## Available Scripts
 
