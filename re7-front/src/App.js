@@ -15,6 +15,8 @@ import { EMOJI, COLOR } from './styled-components';
 import UpdateRecipePage from './pages/update-recipe';
 import RecipePage from './pages/recipe';
 import LinkComponent from './components/link-component';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavComponent = styled.div`
   display: flex;
@@ -96,6 +98,7 @@ const App = () => {
           <Route path="/recipe/:id" element={<RecipePage />} />
         </Routes>
       </StyledComponent>
+      <ToastContainer />
     </Router>
   );
 };

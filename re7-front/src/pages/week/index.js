@@ -76,8 +76,9 @@ const WeekPage = () => {
       ) : (
         <>Rien à prévoir ? </>
       )}
+
       {(week.lines[0].isActive || week.lines[1].isActive || week.lines[2].isActive) && (
-        <button disabled={isDisabled}>Prêt! </button>
+        <div>{isDisabled ? 'Il reste des plats à remplir ...' : 'Miam ! Que des bons choix !'}</div>
       )}
     </StyledPage>
   );

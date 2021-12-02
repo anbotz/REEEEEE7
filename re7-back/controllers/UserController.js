@@ -35,6 +35,7 @@ async function login(req, res, next) {
         'HACKER_LES_MDP_ICI',
         { expiresIn: '24h' }
       ),
+      message: 'Utilisateur connecté',
     });
   } catch (error) {
     console.log(`Erreur lors de la connexion ${error}`);
@@ -66,7 +67,7 @@ async function signup(req, res, next) {
     });
     newUser.save();
 
-    return res.status(200).json('Utilisateur enregistré');
+    return res.status(200).json({ message: 'Utilisateur créé' });
   } catch (error) {
     console.log(`Erreur lors de l'enregistrement ${error}`);
     return res.status(500);

@@ -1,3 +1,5 @@
+import { notify } from '../utils/notify';
+
 const axios = require('axios');
 
 export const getAllRecipes = () => {
@@ -7,7 +9,7 @@ export const getAllRecipes = () => {
       return res.data;
     })
     .catch((error) => {
-      console.log(`erreur lors de la récupération des recettes`);
+      notify(`erreur lors de la récupération des recettes`);
       console.log(error);
     });
 };
@@ -18,12 +20,12 @@ export const createRecipe = (data) => {
     url: 'http://localhost:8000/recipe/',
     data,
   })
-    .then((response) => {
-      console.log(response);
+    .then((res) => {
+      notify(res.data.message);
     })
     .catch((error) => {
-      console.log(`erreur lors de la création de la recette`);
       console.log(error);
+      notify('erreur lors de la création de la recette');
     });
 };
 
@@ -32,11 +34,11 @@ export const deleteRecipe = (id) => {
     method: 'delete',
     url: `http://localhost:8000/recipe/${id}`,
   })
-    .then((response) => {
-      console.log(response);
+    .then((res) => {
+      notify(res.data.message);
     })
     .catch((error) => {
-      console.log(`erreur lors de la suppression de la recette`);
+      notify(`erreur lors de la suppression de la recette`);
       console.log(error);
     });
 };
@@ -49,11 +51,11 @@ export const updateRecipe = (data, id) => {
       recipe: data,
     },
   })
-    .then((response) => {
-      console.log(response);
+    .then((res) => {
+      notify(res.data.message);
     })
     .catch((error) => {
-      console.log(`erreur lors de la suppression de la recette`);
+      notify(`erreur lors de la suppression de la recette`);
       console.log(error);
     });
 };

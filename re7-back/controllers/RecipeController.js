@@ -26,7 +26,7 @@ exports.deleteRecipe = async (req, res, next) => {
   const { id } = req.params;
   try {
     await RecipeSchema.deleteOne({ _id: id });
-    return res.status(204).json({ message: 'Recette supprimée' });
+    return res.status(200).json({ message: 'Recette supprimée' });
   } catch (error) {
     console.log(`Erreur lors de la suppression de la recette ${error}`);
     res.status(500);
@@ -47,7 +47,7 @@ exports.updateRecipe = async (req, res, next) => {
         },
       }
     );
-    return res.status(204).json({ message: 'Recette mise à jour' });
+    res.status(200).json({ message: 'Recette mise à jour' });
   } catch (error) {
     console.log(`Erreur lors de la mise à jour de la recette ${error}`);
     res.status(500);
