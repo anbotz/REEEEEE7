@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getAllRecipes } from '../../services/recipesRoute';
@@ -17,11 +17,27 @@ const WeekPage = () => {
   const dispatch = useDispatch();
   const recipes = useSelector((state) => state.recipes);
   const week = useSelector((state) => state.week);
+  const [isDisabled, setDisabled] = useState(true);
 
   useEffect(() => {
     getAllRecipes().then((res) => dispatch(set(res)));
     dispatch(reset());
   }, [dispatch]);
+
+  useEffect(() => {
+    const condition = week.lines.reduce((acc, line) => {
+      if (line.isActive && !line.isFullfilled) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+
+    if (condition === 0) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [week.lines]);
 
   return (
     <StyledPage>
@@ -61,7 +77,7 @@ const WeekPage = () => {
         <>Rien à prévoir ? </>
       )}
       {(week.lines[0].isActive || week.lines[1].isActive || week.lines[2].isActive) && (
-        <button disabled={true}>Prêt! </button>
+        <button disabled={isDisabled}>Prêt! </button>
       )}
     </StyledPage>
   );

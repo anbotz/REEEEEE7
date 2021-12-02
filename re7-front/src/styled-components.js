@@ -81,7 +81,6 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledTitle = styled.div`
-  height: 100%;
   font-size: 1.2em;
   display: flex;
   flex-direction: row;

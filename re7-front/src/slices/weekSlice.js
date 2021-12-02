@@ -78,8 +78,8 @@ export const weekSlice = createSlice({
       return state;
     },
     setFullfilled: (state, action) => {
-      const { indexLine } = action.payload;
-      state.lines[indexLine].isFullfilled = true;
+      const { indexLine, isFullfilled } = action.payload;
+      state.lines[indexLine].isFullfilled = isFullfilled;
 
       return state;
     },

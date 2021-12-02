@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addFilledMeals, removeFilledMeals, resetDays, setDays } from '../../../slices/weekSlice';
+import { addFilledMeals, removeFilledMeals, resetDays, setDays, setFullfilled } from '../../../slices/weekSlice';
 import { COLOR } from '../../../styled-components';
 import { useDetectOutsideClick } from '../../../utils/useDetectOutsideClick';
 
@@ -46,6 +46,7 @@ const StyledRecipeChoice = styled.div`
     cursor: pointer;
     color: white;
   }
+  ${(props) => (props.bold ? 'font-weight: bold;' : '')}
 `;
 
 const StyledChoice = styled.div`
@@ -89,10 +90,12 @@ const DayTdComponent = ({ day, recipes, cellCouple }) => {
         <StyledMenuContainer>
           <StyledMenu ref={dropdownRef} isActive={isActive}>
             <StyledRecipeChoice
+              bold
               onClick={() => {
                 setChoice(day.day);
                 dispatch(removeFilledMeals());
                 dispatch(resetDays({ cellCouple }));
+                dispatch(setFullfilled({ indexLine: cellCouple.indexLine, isFullfilled: false }));
               }}>
               {day.day}
             </StyledRecipeChoice>
